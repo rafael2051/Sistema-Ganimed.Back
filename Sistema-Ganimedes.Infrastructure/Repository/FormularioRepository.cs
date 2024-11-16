@@ -1,7 +1,6 @@
 ﻿using Sistema_Ganimedes.Infrastructure.Common.Persistence;
 using Dapper;
 using USP.Ganimedes.API.Model;
-using Sistema_Ganimedes.Infrastructure.Interfaces;
 
 namespace Sistema_Ganimedes.Infrastructure.Repository
 {
