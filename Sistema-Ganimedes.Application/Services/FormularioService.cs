@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sistema_Ganimedes.Application.Services
 {
-    internal class FormularioService
+    public class FormularioService : IFormularioService
     {
     }
 }

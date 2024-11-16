@@ -3,6 +3,7 @@
 namespace Sistema_Ganimedes.API.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class NotificacaoController : ControllerBase
     {
     }

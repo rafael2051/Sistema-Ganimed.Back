@@ -1,4 +1,4 @@
-﻿using Sistema_Ganimedes.Infrastructure.Repository.Interfaces;
+﻿using Sistema_Ganimedes.Infrastructure.Interfaces;
 
 namespace Sistema_Ganimedes.Infrastructure.Repository
 {

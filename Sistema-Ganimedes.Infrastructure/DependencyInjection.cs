@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Sistema_Ganimedes.Infrastructure;
 using Sistema_Ganimedes.Infrastructure.Common.Persistence;
 using Sistema_Ganimedes.Infrastructure.Repository;
-using Sistema_Ganimedes.Infrastructure.Repository.Interfaces;
 
 namespace Sistema_Ganimedes.Application
 {

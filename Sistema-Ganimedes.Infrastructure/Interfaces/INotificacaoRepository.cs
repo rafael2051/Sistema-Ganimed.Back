@@ -1,4 +1,4 @@
-﻿namespace Sistema_Ganimedes.Infrastructure
+﻿namespace Sistema_Ganimedes.Infrastructure.Repository
 {
     internal interface INotificacaoRepository
     {
