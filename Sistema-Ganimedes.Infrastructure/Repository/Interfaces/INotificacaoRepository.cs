@@ -1,7 +1,6 @@
 ﻿namespace Sistema_Ganimedes.Infrastructure
 {
-    public class Class1
+    internal interface INotificacaoRepository
     {
-
     }
 }
