@@ -6,7 +6,12 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
 {
     public class FormularioRepository : IFormularioRepository
     {
-        private DbContext? _dbContext;
+        private readonly DbContext _dbContext;
+
+        public FormularioRepository(DbContext dbContext) 
+        {
+            _dbContext = dbContext;
+        }
 
         public Formulario GetFormulario()
         {
