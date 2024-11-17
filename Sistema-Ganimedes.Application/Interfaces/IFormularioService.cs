@@ -8,5 +8,6 @@ namespace Sistema_Ganimedes.Application.Services
 {
     public interface IFormularioService
     {
+        public bool ValidaNUsp(string nUsp);
     }
 }

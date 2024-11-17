@@ -14,6 +14,18 @@ namespace Sistema_Ganimedes.API.Controllers
             _formularioService = formularioService;
         }
 
+        [HttpGet("/getFormulario/{NUSP}")]
+        public IActionResult GetFormulario(string NUSP)
+        {
+
+            if(!_formularioService.ValidaNUsp(NUSP))
+            {
+                return StatusCode(404, "Número USP inválido.");
+            }
+
+            return StatusCode(200, "0k!");
+
+        }
 
 
     }

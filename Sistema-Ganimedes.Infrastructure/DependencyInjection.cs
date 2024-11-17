@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sistema_Ganimedes.Infrastructure.Common.Persistence;
+using Sistema_Ganimedes.Infrastructure.Interfaces;
 using Sistema_Ganimedes.Infrastructure.Repository;
 
 namespace Sistema_Ganimedes.Infrastructure
@@ -13,6 +14,7 @@ namespace Sistema_Ganimedes.Infrastructure
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<INotificacaoRepository, NotificacaoRepository>();
             services.AddScoped<IParecerRepository, ParecerRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             services.AddSingleton(provider =>
             {

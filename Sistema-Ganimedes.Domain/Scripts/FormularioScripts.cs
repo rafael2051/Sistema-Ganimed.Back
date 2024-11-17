@@ -2,5 +2,9 @@
 {
     public static class FormularioScripts
     {
+        public static string GetFormulario()
+        {
+            return $@"";
+        }
     }
 }
