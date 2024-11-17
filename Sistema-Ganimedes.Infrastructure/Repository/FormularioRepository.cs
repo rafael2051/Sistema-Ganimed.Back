@@ -16,10 +16,6 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
         public Formulario GetFormulario()
         {
             var connection = _dbContext?.GetConnection();
-            connection?.Open();
-
-
-            connection?.Close();
 
             return null;
 
