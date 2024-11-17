@@ -8,6 +8,7 @@ namespace Sistema_Ganimedes.Infrastructure.Common.Persistence
         public DbContext(string connectionString) 
         {
             _connection = new NpgsqlConnection(connectionString);
+            _connection.Open();
         }
         public NpgsqlConnection GetConnection()
         {
