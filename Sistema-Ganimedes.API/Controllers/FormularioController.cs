@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sistema_Ganimedes.Application.Services;
+using USP.Ganimedes.API.Model;
 
 namespace Sistema_Ganimedes.API.Controllers
 {
@@ -22,6 +23,8 @@ namespace Sistema_Ganimedes.API.Controllers
             {
                 return StatusCode(404, "Número USP inválido.");
             }
+
+            Formulario formulario = _formularioService.GetFormulario(NUSP);
 
             return StatusCode(200, "0k!");
 

@@ -4,7 +4,7 @@
     {
         public static string GetFormulario()
         {
-            return $@"";
+            return $@"select * from formularios where nusp=@nUsp";
         }
     }
 }

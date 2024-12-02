@@ -1,6 +1,8 @@
 ﻿using Sistema_Ganimedes.Domain.Entities;
+using Sistema_Ganimedes.Domain.Enums;
 using Sistema_Ganimedes.Infrastructure.Interfaces;
 using Sistema_Ganimedes.Infrastructure.Repository;
+using USP.Ganimedes.API.Model;
 
 namespace Sistema_Ganimedes.Application.Services
 {
@@ -25,10 +27,18 @@ namespace Sistema_Ganimedes.Application.Services
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            if (usuario!.tipo_usuario != TipoUsuario.ALUNO) return false;
+
+            return true;
+
         }
+
+        public Formulario? GetFormulario(string nUsp)
+        {
+
+            return _formularioRepository.GetFormulario(nUsp);
+        }
+
     }
 }
