@@ -17,10 +17,10 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "HOST": "localhost",
-        "PORT": "5432",
-        "DB": "postgres",
-        "PASSWORD": "63276129",
-        "USERNAME": "postgres"
+        "PORT": "6000",
+        "DB": "ganimedes",
+        "PASSWORD": "password",
+        "USERNAME": "admin"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7260;http://localhost:5000"
