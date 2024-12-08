@@ -1,8 +1,7 @@
-version: "3.9"
-
 services:
   postgres:
-    image: postgres:latest
+    build:
+      context: .
     container_name: sistema-ganimedes-db
     environment:
       POSTGRES_USER: admin
@@ -14,7 +13,6 @@ services:
       - "127.0.0.1:6000:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./base:/docker-entrypoint-initdb.d
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d ganimedes"]

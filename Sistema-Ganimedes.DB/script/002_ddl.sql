@@ -22,12 +22,18 @@ CREATE TABLE IF NOT EXISTS Aluno(
     dt_nascimento DATE NOT NULL,
     nacionalidade VARCHAR(80) NOT NULL
 );
-ADD CONSTRAINT fk_aluno_usuario FOREIGN KEY (nusp) REFERENCES Usuario(nusp);
-ADD CONSTRAINT fk_aluno_usuario_orientador FOREIGN KEY (orientador) REFERENCES Usuario(nusp);
+
+ALTER TABLE Aluno
+ADD CONSTRAINT fk_aluno_usuario 
+FOREIGN KEY (nusp) REFERENCES Usuario(nusp);
+
+ALTER TABLE Aluno
+ADD CONSTRAINT fk_aluno_usuario_orientador 
+FOREIGN KEY (orientador) REFERENCES Usuario(nusp);
 
 CREATE TABLE IF NOT EXISTS Disciplinas (
     codigo_disciplina VARCHAR(7) PRIMARY KEY,
-    nome_disciplina VARCHAR(80) NOT NULL,
+    nome_disciplina VARCHAR(80) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Disciplinas_cursadas(
@@ -36,8 +42,14 @@ CREATE TABLE IF NOT EXISTS Disciplinas_cursadas(
     resultado BOOLEAN NOT NULL,
     semestre VARCHAR(7)
 );
-ADD CONSTRAINT fk_codigo-disciplina_Disciplinas-cursadas_Disciplinas FOREIGN KEY (codigo_disciplina) REFERENCES Disciplinas(codigo_disciplina);
-ADD CONSTRAINT fk_nusp-aluno_Disciplinas-cursadas_Usuario FOREIGN KEY (nusp_aluno) REFERENCES Usuario(nusp);
+
+ALTER TABLE Disciplinas_cursadas
+ADD CONSTRAINT fk_codigo_disciplina_Disciplinas_cursadas_Disciplinas 
+FOREIGN KEY (codigo_disciplina) REFERENCES Disciplinas(codigo_disciplina);
+
+ALTER TABLE Disciplinas_cursadas
+ADD CONSTRAINT fk_nusp_aluno_Disciplinas_cursadas_Usuario 
+FOREIGN KEY (nusp_aluno) REFERENCES Usuario(nusp);
 
 CREATE TABLE IF NOT EXISTS Formulario(
     id_parecer INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -56,8 +68,14 @@ CREATE TABLE IF NOT EXISTS Formulario(
     parecer_ccp VARCHAR(1000) NOT NULL,
     data_preenchimento DATE NOT NULL
 );
-ADD CONSTRAINT fk_nusp-aluno_Formulario_Usuario FOREIGN KEY (nusp_aluno) REFERENCES Usuario(nusp);
-ADD CONSTRAINT fk_nusp-orientador_Formulario_Usuario FOREIGN KEY (nusp_orientador) REFERENCES Usuario(nusp);
+
+ALTER TABLE Formulario
+ADD CONSTRAINT fk_nusp_aluno_Formulario_Usuario 
+FOREIGN KEY (nusp_aluno) REFERENCES Usuario(nusp);
+
+ALTER TABLE Formulario
+ADD CONSTRAINT fk_nusp_orientador_Formulario_Usuario 
+FOREIGN KEY (nusp_orientador) REFERENCES Usuario(nusp);
 
 CREATE TABLE IF NOT EXISTS Notificacao(
     descricao VARCHAR(200) NOT NULL,
@@ -65,5 +83,11 @@ CREATE TABLE IF NOT EXISTS Notificacao(
     nusp_destinatario VARCHAR(8) NOT NULL,
     parecer_gerador INT NOT NULL  
 );
-ADD CONSTRAINT fk_nusp-destinatario_Notificacao_Usuario FOREIGN KEY (nusp_destinatario) REFERENCES Usuario(nusp);
-ADD CONSTRAINT fk_parecer-gerador_Notificacao_Formulario FOREIGN KEY (parecer_gerador) REFERENCES Formulario(id_parecer);
+
+ALTER TABLE Notificacao
+ADD CONSTRAINT fk_nusp_destinatario_Notificacao_Usuario 
+FOREIGN KEY (nusp_destinatario) REFERENCES Usuario(nusp);
+
+ALTER TABLE Notificacao
+ADD CONSTRAINT fk_parecer_gerador_Notificacao_Formulario 
+FOREIGN KEY (parecer_gerador) REFERENCES Formulario(id_parecer);
