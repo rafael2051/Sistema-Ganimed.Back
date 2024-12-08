@@ -2,10 +2,10 @@
 
 namespace Sistema_Ganimedes.Infrastructure.Repository
 {
-    internal interface IFormularioRepository
+    public interface IFormularioRepository
     {
         public ICollection<Formulario> GetFormularios();
-        public Formulario? GetFormulario();
+        public Formulario? GetFormulario(String nUsp);
         public void PostFormulario(Formulario formulario);
         public void UpdateFormulario(Formulario formulario);
     }

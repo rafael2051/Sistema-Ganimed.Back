@@ -1,6 +1,7 @@
 ﻿using Sistema_Ganimedes.Infrastructure.Common.Persistence;
 using Dapper;
 using USP.Ganimedes.API.Model;
+using Sistema_Ganimedes.Domain.Scripts;
 
 namespace Sistema_Ganimedes.Infrastructure.Repository
 {
@@ -13,16 +14,20 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             _dbContext = dbContext;
         }
 
-        public Formulario GetFormulario()
+        public Formulario? GetFormulario(String nUsp)
         {
             var connection = _dbContext?.GetConnection();
-            connection?.Open();
 
+            connection!.Open();
 
-            connection?.Close();
+            Formulario? formulario = connection.QueryFirstOrDefault<Formulario>(FormularioScripts.GetFormulario(), new
+            {
+                nUsp = nUsp
+            });
 
-            return null;
+            connection.Close();
 
+            return formulario;
         }
 
         public ICollection<Formulario> GetFormularios()
