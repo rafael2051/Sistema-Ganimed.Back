@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sistema_Ganimedes.Application.Interfaces;
 using Sistema_Ganimedes.Application.Services;
 
 namespace Sistema_Ganimedes.Application
@@ -9,6 +10,7 @@ namespace Sistema_Ganimedes.Application
         {
 
             services.AddScoped<IFormularioService, FormularioService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             return services;
         }

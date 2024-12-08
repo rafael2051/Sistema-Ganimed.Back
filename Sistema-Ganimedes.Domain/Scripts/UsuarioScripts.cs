@@ -6,8 +6,8 @@
         public static string CreateUsuario()
         {
             return $@"INSERT INTO ganimedes.usuario(nusp, nome, email, link_lattes, dt_atualizacao_lattes, perfil)
-	                VALUES (@nUsp, @nome, @email, @link_lattes,
-	                '@dt_atualizacao_lattes, @perfil);";
+	                VALUES (@nUsp, @nome, @email, @linkLattes,
+	                @dtAtualizacaoLattes, @tipoUsuario);";
         }
 
         public static string CreateAluno()
@@ -19,7 +19,7 @@
 
         public static string GetUsuario(string nUsp)
         {
-            return $@"select * from Usuario
+            return $@"select * from ganimedes.usuario
 	                where nusp='{nUsp}';";
         }
     }

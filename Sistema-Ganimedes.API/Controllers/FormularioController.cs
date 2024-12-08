@@ -15,9 +15,14 @@ namespace Sistema_Ganimedes.API.Controllers
             _formularioService = formularioService;
         }
 
-        [HttpGet("/getFormulario/{NUSP}")]
+        [HttpGet("/getForm/{NUSP}")]
         public IActionResult GetFormulario(string NUSP)
         {
+
+            // USER_TYPE: "Aluno" | "Docente" | "CCP"
+            // NUSP_ORIENTADOR: @NUSP
+            // NUSP_CCP: @NUSP
+
 
             if(!_formularioService.ValidaNUsp(NUSP))
             {
@@ -28,6 +33,12 @@ namespace Sistema_Ganimedes.API.Controllers
 
             return StatusCode(200, "0k!");
 
+        }
+
+        [HttpGet("/getFormsMetaData/{NUSP}")]
+        public IActionResult GetFormularios(string NUSP)
+        {
+            return StatusCode(200, "Ok!");
         }
 
 

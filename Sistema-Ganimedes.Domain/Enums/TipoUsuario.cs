@@ -3,7 +3,7 @@
     public enum TipoUsuario
     {
         ALUNO,
-        ORIENTADOR,
+        DOCENTE,
         CCP
     }
 }

@@ -19,11 +19,12 @@ namespace Sistema_Ganimedes.Infrastructure
             services.AddSingleton(provider =>
             {
                 var host = Environment.GetEnvironmentVariable("HOST");
+                var port = Environment.GetEnvironmentVariable("PORT");
                 var db = Environment.GetEnvironmentVariable("DB");
                 var user = Environment.GetEnvironmentVariable("USERNAME");
                 var pswd = Environment.GetEnvironmentVariable("PASSWORD");
 
-                var connectionString = $"Host={host};Database={db};Username={user};Password={pswd}";
+                var connectionString = $"Host={host};Port={port};Database={db};Username={user};Password={pswd};";
 
                 return new DbContext(connectionString);
             });

@@ -1,13 +1,14 @@
 ﻿using Sistema_Ganimedes.Domain.Entities;
+using Sistema_Ganimedes.Domain.Enums;
 
 namespace Sistema_Ganimedes.Application.Interfaces
 {
     public interface IUsuarioService
     {
-
-        public bool UsuarioExists(string nUsp);
-        public bool RegisterUser(Usuario usuario);
-        public void RegisterStudent(Aluno aluno);
+        public bool RegistraAluno(Aluno aluno);
+        public bool RegistraUsuario(Usuario usuario);
+        public bool ChecaSeUsuarioExiste(string nUsp);
+        public bool ChecaSeUsuarioEDoTipoFornecido(string nUsp, TipoUsuario tipoUsuario);
 
     }
 }

@@ -6,7 +6,7 @@ namespace Sistema_Ganimedes.Domain.Entities
     public class Usuario
     {
         [JsonPropertyName("nusp")]
-        public string nusp { get; set; }
+        public string nUsp { get; set; }
 
         [JsonPropertyName("nome")]
         public string nome { get; set; }
@@ -18,10 +18,9 @@ namespace Sistema_Ganimedes.Domain.Entities
         public string linkLattes { get; set; }
 
         [JsonPropertyName("dt_atualizacao_lattes")]
-        public DateOnly dtAtualizacaoLattes { get; set; }
+        public DateTime dtAtualizacaoLattes { get; set; }
 
         [JsonPropertyName("perfil")]
-        public string perfil {  get; set; }
-        public TipoUsuario tipo_usuario { get; set; }
+        public TipoUsuario tipoUsuario { get; set; }
     }
 }
