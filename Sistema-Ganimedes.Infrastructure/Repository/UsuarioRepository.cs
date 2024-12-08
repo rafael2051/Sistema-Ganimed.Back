@@ -19,9 +19,13 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
 
             var connection = _dbContext.GetConnection();
 
+            connection!.Open();
+
             var script = UsuarioScripts.GetUsuario(nUsp);
 
             var usuario = connection.QueryFirstOrDefault<Usuario>(UsuarioScripts.GetUsuario(nUsp));
+
+            connection!.Close();
 
             return usuario;
         }
