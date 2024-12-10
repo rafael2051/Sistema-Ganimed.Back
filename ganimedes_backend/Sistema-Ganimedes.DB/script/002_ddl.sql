@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS Usuario(
     nusp VARCHAR(8) PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
+    password VARCHAR(30) NOT NULL,
     link_lattes VARCHAR(300) NOT NULL,
     dt_atualizacao_lattes DATE NOT NULL,
     perfil VARCHAR(7) NOT NULL
