@@ -5,8 +5,8 @@
 
         public static string CreateUsuario()
         {
-            return $@"INSERT INTO ganimedes.usuario(nusp, nome, email, link_lattes, dt_atualizacao_lattes, perfil)
-	                VALUES (@nUsp, @nome, @email, @linkLattes,
+            return $@"INSERT INTO ganimedes.usuario(nusp, nome, email, password, link_lattes, dt_atualizacao_lattes, perfil)
+	                VALUES (@nUsp, @nome, @email, @password, @linkLattes,
 	                @dtAtualizacaoLattes, @tipoUsuario);";
         }
 
