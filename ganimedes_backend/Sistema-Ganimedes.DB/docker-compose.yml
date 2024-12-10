@@ -1,0 +1,25 @@
+services:
+  postgres:
+    build:
+      context: .
+    container_name: sistema-ganimedes-db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ganimedes
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+
+    ports:
+      - "127.0.0.1:6000:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d ganimedes"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    driver: local
