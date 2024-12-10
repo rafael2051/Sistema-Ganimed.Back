@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS Usuario(
     password VARCHAR(30) NOT NULL,
     link_lattes VARCHAR(300) NOT NULL,
     dt_atualizacao_lattes DATE NOT NULL,
-    perfil VARCHAR(7) NOT NULL
+    perfil VARCHAR(7) NOT NULL,
+    senha VARCHAR(256) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Aluno(
