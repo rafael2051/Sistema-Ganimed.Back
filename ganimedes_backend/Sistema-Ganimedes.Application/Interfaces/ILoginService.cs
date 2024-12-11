@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sistema_Ganimedes.Domain.Entities;
+using System.Net;
 
 namespace Sistema_Ganimedes.Application.Interfaces
 {
     public interface ILoginService
     {
+        public Task<LoginResponse> ValidarLogin(String email, String senha);
     }
 }

@@ -28,7 +28,7 @@ namespace Sistema_Ganimedes.Application.Services
                 return true;
             }
 
-            if (usuario!.tipoUsuario != TipoUsuario.ALUNO) return false;
+            if (usuario!.perfil != "ALUNO") return false;
 
             return true;
 

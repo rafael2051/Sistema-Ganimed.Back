@@ -1,6 +1,6 @@
 ﻿namespace Sistema_Ganimedes.Domain.Enums
 {
-    public enum TipoUsuario
+    public enum Perfil
     {
         ALUNO,
         DOCENTE,
