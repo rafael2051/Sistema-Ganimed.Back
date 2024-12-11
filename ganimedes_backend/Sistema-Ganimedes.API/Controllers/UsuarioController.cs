@@ -31,6 +31,10 @@ namespace Sistema_Ganimedes.API.Controllers
             {
                 registered = _usuarioService.RegistraUsuario(usuario);
             }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (Exception ex) 
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
@@ -48,7 +52,7 @@ namespace Sistema_Ganimedes.API.Controllers
             if (!_usuarioService.ChecaSeUsuarioExiste(aluno.nUsp))
                 return StatusCode((int)HttpStatusCode.Conflict, "Ainda não existe registro de usuário para este aluno");
 
-            if (!_usuarioService.ChecaSeUsuarioEDoTipoFornecido(aluno.nUsp, TipoUsuario.ALUNO))
+            if (!_usuarioService.ChecaSeUsuarioEDoTipoFornecido(aluno.nUsp, "ALUNO"))
                 return StatusCode((int)HttpStatusCode.Conflict, "O número USP fornecido não é o de um aluno");
 
             bool registered;

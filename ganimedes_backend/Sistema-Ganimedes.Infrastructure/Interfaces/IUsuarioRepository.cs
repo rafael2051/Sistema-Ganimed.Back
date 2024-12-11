@@ -4,9 +4,10 @@ namespace Sistema_Ganimedes.Infrastructure.Interfaces
 {
     public interface IUsuarioRepository
     {
-        public Usuario? GetUsuario(string nUsp);
         public int CadastrarUsuario(Usuario usuario);
         public int CadastrarAluno(Aluno aluno);
+        public Usuario? GetUsuario(string nUsp);
+        public Aluno? GetAluno(string nUsp);
 
     }
 }

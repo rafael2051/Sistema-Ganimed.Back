@@ -1,29 +1,29 @@
 ﻿using Sistema_Ganimedes.Domain.Enums;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Sistema_Ganimedes.Domain.Entities
 {
     public class Usuario
     {
-        [JsonPropertyName("nusp")]
+        [JsonProperty("nusp")]
         public string nUsp { get; set; }
 
-        [JsonPropertyName("nome")]
+        [JsonProperty("nome")]
         public string nome { get; set; }
 
-        [JsonPropertyName("email")]
+        [JsonProperty("email")]
         public string email { get; set; }
 
-        [JsonPropertyName("senha")]
+        [JsonProperty("senha")]
         public string password { get; set; }
 
-        [JsonPropertyName("link_lattes")]
+        [JsonProperty("link_lattes")]
         public string linkLattes { get; set; }
 
-        [JsonPropertyName("dt_atualizacao_lattes")]
+        [JsonProperty("dt_atualizacao_lattes")]
         public DateTime dtAtualizacaoLattes { get; set; }
 
-        [JsonPropertyName("perfil")]
-        public TipoUsuario tipoUsuario { get; set; }
+        [JsonProperty("perfil")]
+        public String perfil { get; set; }
     }
 }

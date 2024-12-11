@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Sistema_Ganimedes.Domain.Entities
 {
     public class Login
     {
-        [JsonPropertyName("username")]
-        public String usuario {  get; set; }
+        [JsonProperty("username")]
+        public String username {  get; set; }
 
-        [JsonPropertyName("password")]
+        [JsonProperty("password")]
         public String password { get; set; }
 
+        public Login(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+        }
     }
 }

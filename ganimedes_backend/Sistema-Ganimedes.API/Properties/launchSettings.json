@@ -20,7 +20,10 @@
         "PORT": "6000",
         "DB": "ganimedes",
         "PASSWORD": "password",
-        "USERNAME": "admin"
+        "USERNAME": "admin",
+        "AUTHENTICATION_SERVICE_URL": "http://localhost:8080",
+        "AUTHENTICATE_ENDPOINT": "/authenticate",
+        "VALIDATE_TOKEN": "/validateToken/@nUsp"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7260;http://localhost:5000"

@@ -18,6 +18,7 @@ namespace Sistema_Ganimedes.Application.Services
 
         public bool RegistraAluno(Aluno aluno)
         {
+
             try
             {
                 var rowsAffected = _usuarioRepository.CadastrarAluno(aluno);
@@ -33,6 +34,12 @@ namespace Sistema_Ganimedes.Application.Services
 
         public bool RegistraUsuario(Usuario usuario)
         {
+
+            if(!(usuario.perfil == "ALUNO" || usuario.perfil == "DOCENTE" || usuario.perfil == "CCP"))
+            {
+                throw new ArgumentException("Perfil deve ser ALUNO, DOCENTE ou CCP");
+            }
+
             try
             {
                 var rowsAffected = _usuarioRepository.CadastrarUsuario(usuario);
@@ -58,15 +65,26 @@ namespace Sistema_Ganimedes.Application.Services
 
         }
 
-        public bool ChecaSeUsuarioEDoTipoFornecido(string nUsp, TipoUsuario tipoUsuario)
+        public bool ChecaSeUsuarioEDoTipoFornecido(string nUsp, String tipoUsuario)
         {
             Usuario? usuario = _usuarioRepository.GetUsuario(nUsp);
 
-            if (usuario.tipoUsuario != tipoUsuario)
+            if (usuario.perfil != tipoUsuario)
                 return false;
 
             return true;
 
         }
+
+        public Usuario? GetDadosUsuario(string nUsp)
+        {
+            return _usuarioRepository.GetUsuario(nUsp);
+        }
+
+        public Aluno? GetDadosAluno(string nUsp)
+        {
+            return _usuarioRepository.GetAluno(nUsp);
+        }
+
     }
 }
