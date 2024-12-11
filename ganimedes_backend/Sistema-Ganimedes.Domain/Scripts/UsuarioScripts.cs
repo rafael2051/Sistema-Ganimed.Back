@@ -7,7 +7,7 @@
         {
             return $@"INSERT INTO ganimedes.usuario(nusp, nome, email, password, link_lattes, dt_atualizacao_lattes, perfil)
 	                VALUES (@nUsp, @nome, @email, @password, @linkLattes,
-	                @dtAtualizacaoLattes, @tipoUsuario);";
+	                @dtAtualizacaoLattes, @perfil);";
         }
 
         public static string CreateAluno()
@@ -22,5 +22,12 @@
             return $@"select * from ganimedes.usuario
 	                where nusp='{nUsp}';";
         }
+
+        public static string GetAluno(string nUsp)
+        {
+            return $@"select * from ganimedes.aluno 
+	                    where nusp='{nUsp}';";
+        }
+
     }
 }

@@ -1,40 +1,40 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Sistema_Ganimedes.Domain.Entities
 {
     public class Aluno
     {
-        [JsonPropertyName("nusp")]
+        [JsonProperty("nusp")]
         public string nUsp { get; set; }
 
-        [JsonPropertyName("curso")]
+        [JsonProperty("curso")]
         public string curso { get; set; }
 
-        [JsonPropertyName("ano_ingresso")]
+        [JsonProperty("ano_ingresso")]
         public int anoIngresso { get; set; }
 
-        [JsonPropertyName("exame_proficiencia")]
+        [JsonProperty("exame_proficiencia")]
         public String exameProficiencia { get; set; }
 
-        [JsonPropertyName("exame_qualificacao")]
+        [JsonProperty("exame_qualificacao")]
         public String exameQualificacao { get; set; }
 
-        [JsonPropertyName("prazo_maximo_qualificacao")]
+        [JsonProperty("prazo_maximo_qualificacao")]
         public DateTime prazoMaximoQualificacao { get; set; }
 
-        [JsonPropertyName("prazo_maximo_deposito_tese")]
+        [JsonProperty("prazo_maximo_deposito_tese")]
         public DateTime prazoMaximoDepositoTese { get; set; }
 
-        [JsonPropertyName("orientador")]
+        [JsonProperty("orientador")]
         public String orientador { get; set; }
 
-        [JsonPropertyName("rg")]
+        [JsonProperty("rg")]
         public String rg { get; set; }
 
-        [JsonPropertyName("dt_nascimento")]
+        [JsonProperty("dt_nascimento")]
         public DateTime dataNascimento { get; set; }
 
-        [JsonPropertyName("nacionalidade")]
+        [JsonProperty("nacionalidade")]
         public String nacionalidade { get; set; }
 
     }

@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Sistema_Ganimedes.Application.Interfaces;
 using Sistema_Ganimedes.Domain.Entities;
-using System.Text.Json.Nodes;
+using System.Net;
+
+using Sistema_Ganimedes.Domain.Enums;
 
 namespace Sistema_Ganimedes.API.Controllers
 {
@@ -9,19 +12,43 @@ namespace Sistema_Ganimedes.API.Controllers
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
+        private readonly ILoginService _loginService;
+        private readonly IUsuarioService _usuarioService;
+
+        public LoginController(ILoginService loginService, IUsuarioService usuarioService)
+        {
+            _loginService = loginService;
+            _usuarioService = usuarioService;
+        }
 
         [HttpPost("/login")]
-        public IActionResult MakeLogin(Login login)
+        public async Task<IActionResult> MakeLogin(Login login)
         {
 
-            // SE O LOGIN FOR BEM SUCEDIDO, RETORNAR UM STATUS CODE 200 COM O TOKEN,
-            // DATA DE EXPIRAÇÃO E OS DADOS DO USUÁRIO
+            var loginResponse = await _loginService.ValidarLogin(login.username, login.password);
 
-            return StatusCode(200, JsonConvert.SerializeObject(new LoginResponse()) );
+            if(loginResponse.statusCode != HttpStatusCode.Accepted)
+            {
+                return StatusCode((int)loginResponse.statusCode, null);
+            }
 
-            // SE ACONTECER UM ERRO INTERNO NO SERVIDOR, RETORNA STATUS CODE 500
+            var dadosUsuario = _usuarioService.GetDadosUsuario(loginResponse.nUsp);
 
-            // SE O USUÁRIO DIGITAR LOGIN OU SENHA ERRADA, RETORNA STATUS CODE 400
+            if(dadosUsuario is null)
+                return StatusCode((int)HttpStatusCode.InternalServerError, JsonConvert.SerializeObject(
+                        new Exception("Unknown error: the user was authenticated, but for some reason it was not possible" +
+                        "to get the user data")
+                    ));
+
+            Aluno? dadosAluno = null;
+
+            if (dadosUsuario.perfil == "ALUNO")
+                dadosAluno = _usuarioService.GetDadosAluno(loginResponse.nUsp);
+
+            loginResponse.dadosUsuario = dadosUsuario;
+            loginResponse.dadosAluno = dadosAluno;
+
+            return StatusCode((int)loginResponse.statusCode, JsonConvert.SerializeObject(loginResponse) );
 
         }
 

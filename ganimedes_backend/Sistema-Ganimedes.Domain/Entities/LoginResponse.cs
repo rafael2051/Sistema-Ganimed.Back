@@ -1,21 +1,27 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Net;
+using Newtonsoft.Json;
 
 namespace Sistema_Ganimedes.Domain.Entities
 {
     public class LoginResponse
     {
 
-        [JsonPropertyName("token")]
+        [JsonIgnore]
+        public HttpStatusCode statusCode { get; set; }
+        [JsonIgnore]
+        public String nUsp { get; set; }
+
+        [JsonProperty("token")]
         public String token {  get; set; }
 
-        [JsonPropertyName("expiration_date")]
-        public DateTime dataExpiracao { get; set; }
+        [JsonProperty("expiration_date")]
+        public DateTimeOffset dataExpiracao { get; set; }
 
-        [JsonPropertyName("user_data")]
+        [JsonProperty("user_data")]
         public Usuario dadosUsuario { get; set; }
 
-        [JsonPropertyName("student_data")]
-        public Aluno dadosAluno { get; set; }
+        [JsonProperty("student_data")]
+        public Aluno? dadosAluno { get; set; }
 
     }
 }

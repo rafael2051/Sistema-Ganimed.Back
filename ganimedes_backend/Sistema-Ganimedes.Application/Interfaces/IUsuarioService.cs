@@ -8,7 +8,9 @@ namespace Sistema_Ganimedes.Application.Interfaces
         public bool RegistraAluno(Aluno aluno);
         public bool RegistraUsuario(Usuario usuario);
         public bool ChecaSeUsuarioExiste(string nUsp);
-        public bool ChecaSeUsuarioEDoTipoFornecido(string nUsp, TipoUsuario tipoUsuario);
+        public bool ChecaSeUsuarioEDoTipoFornecido(string nUsp, String tipoUsuario);
+        public Usuario? GetDadosUsuario(string nUsp);
+        public Aluno? GetDadosAluno(string nUsp);
 
     }
 }

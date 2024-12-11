@@ -28,7 +28,7 @@ public class Usuario {
     private LocalDate dtAtualizacaoLattes;
 
     @Column(name = "perfil", nullable = false)
-    private String tipoUsuario;
+    private String perfil;
 
     public String getNUsp() {
         return nUsp;
@@ -79,11 +79,11 @@ public class Usuario {
     }
 
     public String getTipoUsuario() {
-        return tipoUsuario;
+        return perfil;
     }
 
     public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+        this.perfil = tipoUsuario;
     }
 }
 

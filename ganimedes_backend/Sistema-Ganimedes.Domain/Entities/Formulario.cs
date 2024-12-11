@@ -1,43 +1,43 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace USP.Ganimedes.API.Model
 {
     public class Formulario
     {
-        [JsonPropertyName("id_parecer")]
+        [JsonProperty("id_parecer")]
         public int IdParecer { get; set; }
 
-        [JsonPropertyName("aluno")]
+        [JsonProperty("aluno")]
         public string Aluno { get; set; } = "";
 
-        [JsonPropertyName("orientador")]
+        [JsonProperty("orientador")]
         public string Orientador { get; set; } = "";
 
-        [JsonPropertyName("resultado")]
+        [JsonProperty("resultado")]
         public int Resultado { get; set; }
 
-        [JsonPropertyName("artigos_em_escrita")]
+        [JsonProperty("artigos_em_escrita")]
         public int ArtigosEmEscrita { get; set; }
 
-        [JsonPropertyName("artigos_em_avaliacao")]
+        [JsonProperty("artigos_em_avaliacao")]
         public int ArtigosEmAvaliacao { get; set; }
 
-        [JsonPropertyName("artigos_aceitos")]
+        [JsonProperty("artigos_aceitos")]
         public int ArtigosAceitos { get; set; }
 
-        [JsonPropertyName("atividades_academicas")]
+        [JsonProperty("atividades_academicas")]
         public string AtividadesAcademicas { get; set; } = "";
 
-        [JsonPropertyName("atividades_pesquisa")]
+        [JsonProperty("atividades_pesquisa")]
         public string AtividadesPesquisa { get; set; } = "";
 
-        [JsonPropertyName("declaracao_adicional_comissao")]
+        [JsonProperty("declaracao_adicional_comissao")]
         public string DeclaracaoAdicionalComissao { get; set; } = "";
 
-        [JsonPropertyName("dificuldade_apoio_coordenacao")]
+        [JsonProperty("dificuldade_apoio_coordenacao")]
         public bool DificuldadeApoioCoordenacao { get; set; }
 
-        [JsonPropertyName("data_preenchimento")]
+        [JsonProperty("data_preenchimento")]
         public DateTime DataPreenchimento { get; set; }
     }
 }

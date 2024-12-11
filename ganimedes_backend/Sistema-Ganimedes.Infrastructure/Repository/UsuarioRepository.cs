@@ -17,6 +17,25 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             _dbContext = dbContext;
         }
 
+        public int CadastrarUsuario(Usuario usuario)
+        {
+            var connection = _dbContext.GetConnection();
+
+            try
+            {
+                var rowsAffected = connection.Execute(UsuarioScripts.CreateUsuario(), usuario);
+                connection.Close();
+                return rowsAffected;
+            }
+            catch (NpgsqlException)
+            {
+                connection.Close();
+                throw;
+            }
+
+
+        }
+
         public int CadastrarAluno(Aluno aluno)
         {
             var connection = _dbContext.GetConnection();
@@ -34,27 +53,8 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             }
         }
 
-        public int CadastrarUsuario(Usuario usuario)
-        {
-            var connection = _dbContext.GetConnection();
-
-            try
-            {
-                var rowsAffected = connection.Execute(UsuarioScripts.CreateUsuario(), usuario);
-                connection.Close();
-                return rowsAffected;
-            } catch(NpgsqlException)
-            {
-                connection.Close();
-                throw;
-            }
-
-
-        }
-
         public Usuario? GetUsuario(string nUsp)
         {
-
             var connection = _dbContext.GetConnection();
 
             var usuario = connection.QueryFirstOrDefault<Usuario>(UsuarioScripts.GetUsuario(nUsp));
@@ -62,6 +62,18 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             connection!.Close();
 
             return usuario;
+        }
+
+        public Aluno? GetAluno(string nUsp)
+        {
+            var connection = _dbContext.GetConnection();
+
+            var aluno = connection.QueryFirstOrDefault<Aluno>(UsuarioScripts.GetAluno(nUsp));
+
+            connection!.Close();
+
+            return aluno;
+
         }
     }
 }
