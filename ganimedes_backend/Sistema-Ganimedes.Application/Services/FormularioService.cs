@@ -1,5 +1,5 @@
-﻿using Sistema_Ganimedes.Domain.Entities;
-using Sistema_Ganimedes.Domain.Enums;
+﻿using Npgsql;
+using Sistema_Ganimedes.Domain.Entities;
 using Sistema_Ganimedes.Infrastructure.Interfaces;
 using Sistema_Ganimedes.Infrastructure.Repository;
 using USP.Ganimedes.API.Model;
@@ -34,11 +34,45 @@ namespace Sistema_Ganimedes.Application.Services
 
         }
 
-        public Formulario? GetFormulario(string nUsp)
+        public Formulario? GetFormulario(String nUspFromStudent)
         {
 
-            return _formularioRepository.GetFormulario(nUsp);
+            return _formularioRepository.GetFormulario(nUspFromStudent);
         }
+
+        public Formulario? GetFormulario(String nUspFromTeacher, String nUspFromStudent)
+        {
+            return _formularioRepository.GetFormulario(nUspFromTeacher, nUspFromStudent);
+        }
+
+        public bool InsertFormulario(Formulario formulario)
+        {
+            try
+            {
+                var rowsAffected = _formularioRepository.InsertFormulario(formulario);
+
+                return rowsAffected > 0;
+
+            }
+            catch(NpgsqlException)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<FormMetaData> GetFormsMetadata(String nUspFromTeacher)
+        {
+            return _formularioRepository.GetFormsMetadataRelatedToTeacher(nUspFromTeacher);
+        }
+
+        public bool UpdateForm(Formulario formulario)
+        {
+            var rowsAffected = _formularioRepository.UpdateForm(formulario);
+
+            return rowsAffected > 0;
+
+        }
+
 
     }
 }

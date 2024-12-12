@@ -12,6 +12,7 @@ namespace Sistema_Ganimedes.Application
             services.AddScoped<IFormularioService, FormularioService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             return services;
         }
