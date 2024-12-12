@@ -81,10 +81,35 @@ namespace Sistema_Ganimedes.API.Controllers
 
         }
 
-        [HttpGet("/getFormsMetaData/{NUSP}")]
-        public IActionResult GetFormularios(string NUSP)
+        [HttpGet("/getFormsMetaData/{nUsp}")]
+        public async Task<IActionResult> GetFormularios(string nUsp)
         {
-            return StatusCode(200, "Ok!");
+            //Verificar se token foi enviado como header na request
+            Request.Headers.TryGetValue("Authentication", out StringValues authenticationValue);
+
+            if (authenticationValue.Count() == 0)
+                return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
+
+            string token = authenticationValue.ToString();
+
+            //Verificar se número usp enviado é de um docente
+            Usuario? usuario = _usuarioService.GetDadosUsuario(nUsp);
+
+            if (usuario is null)
+                return StatusCode((int)HttpStatusCode.NotFound, "O número usp fornecido na url não está cadastrado no banco");
+
+            if (usuario.perfil != "DOCENTE")
+                return StatusCode((int)HttpStatusCode.BadRequest, "Forneca o número USP de um aluno na url");
+
+            //Autenticar número USP
+            if (!await _authenticationService.ValidarToken(token, nUsp))
+                return StatusCode((int)HttpStatusCode.Unauthorized, "Token inválido");
+
+            IEnumerable<FormMetaData> formsMetaData = _formularioService.GetFormsMetadata(nUsp);
+
+            return StatusCode((int)HttpStatusCode.OK, JsonConvert.SerializeObject(formsMetaData));
+
+
         }
 
         [HttpPost("/postFormulario")]
@@ -119,6 +144,38 @@ namespace Sistema_Ganimedes.API.Controllers
 
             }
             catch(Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+        }
+
+        [HttpPut("/updateFormulario")]
+        public async Task<IActionResult> UpdateFormulario(Formulario formulario)
+        {
+
+            Request.Headers.TryGetValue("Authentication", out StringValues authenticationValue);
+
+            if (authenticationValue.Count() == 0)
+                return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
+
+            string token = authenticationValue.ToString();
+
+            if (!await _authenticationService.ValidarToken(token, formulario.aluno))
+                return StatusCode((int)HttpStatusCode.Unauthorized, "Token inválido");
+
+
+            try
+            {
+                bool formWasUpdated = _formularioService.UpdateForm(formulario);
+
+                if (!formWasUpdated)
+                    return StatusCode((int)HttpStatusCode.InternalServerError, "Formulário não foi atualizado por motivo desconhecido");
+
+                return StatusCode((int)HttpStatusCode.OK, "Formulário foi atualizado");
+
+            }
+            catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }

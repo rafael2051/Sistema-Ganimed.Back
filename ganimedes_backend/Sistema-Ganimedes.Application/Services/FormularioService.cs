@@ -60,6 +60,19 @@ namespace Sistema_Ganimedes.Application.Services
             }
         }
 
+        public IEnumerable<FormMetaData> GetFormsMetadata(String nUspFromTeacher)
+        {
+            return _formularioRepository.GetFormsMetadataRelatedToTeacher(nUspFromTeacher);
+        }
+
+        public bool UpdateForm(Formulario formulario)
+        {
+            var rowsAffected = _formularioRepository.UpdateForm(formulario);
+
+            return rowsAffected > 0;
+
+        }
+
 
     }
 }

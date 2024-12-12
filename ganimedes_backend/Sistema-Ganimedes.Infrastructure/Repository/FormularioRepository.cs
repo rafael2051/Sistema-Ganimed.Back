@@ -3,6 +3,7 @@ using Dapper;
 using USP.Ganimedes.API.Model;
 using Sistema_Ganimedes.Domain.Scripts;
 using Npgsql;
+using Sistema_Ganimedes.Domain.Entities;
 
 namespace Sistema_Ganimedes.Infrastructure.Repository
 {
@@ -57,6 +58,8 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
                 var connection = _dbContext.GetConnection();
                 var rowsAffected = connection.Execute(FormularioScripts.InsertFormulario(), formulario);
 
+                connection!.Close();
+
                 return rowsAffected;
             }
             catch (NpgsqlException)
@@ -70,5 +73,49 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<FormMetaData> GetFormsMetadataRelatedToTeacher(String nUspFromTeacher)
+        {
+            try
+            {
+                var connection = _dbContext?.GetConnection();
+                
+                var formsMetaData = connection!.Query<FormMetaData>(FormularioScripts.GetFormsMetadataRelatedToTeacher(),
+                    new 
+                    {
+                        nUspFromTeacher = nUspFromTeacher
+                    });
+
+                connection!.Close();
+
+                return formsMetaData;
+
+            }
+            catch (NpgsqlException)
+            {  
+                throw; 
+            }
+        }
+
+        public int UpdateForm(Formulario formulario)
+        {
+            try
+            {
+                var connection = _dbContext?.GetConnection();
+
+                var rowsUpdated = connection!.Execute(FormularioScripts.UpdateForm(), formulario);
+
+                connection!.Close();
+
+                return rowsUpdated;
+
+            }
+            catch (NpgsqlException)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

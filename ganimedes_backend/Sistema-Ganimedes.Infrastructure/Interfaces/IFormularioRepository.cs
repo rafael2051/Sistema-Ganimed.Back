@@ -1,4 +1,5 @@
-﻿using USP.Ganimedes.API.Model;
+﻿using Sistema_Ganimedes.Domain.Entities;
+using USP.Ganimedes.API.Model;
 
 namespace Sistema_Ganimedes.Infrastructure.Repository
 {
@@ -9,5 +10,7 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
         public Formulario? GetFormulario(String nUspFromTeacher, String nUspFromStudent);
         public int InsertFormulario(Formulario formulario);
         public void UpdateFormulario(Formulario formulario);
+        public IEnumerable<FormMetaData> GetFormsMetadataRelatedToTeacher(String nUspFromTeacher);
+        public int UpdateForm(Formulario formulario);
     }
 }
