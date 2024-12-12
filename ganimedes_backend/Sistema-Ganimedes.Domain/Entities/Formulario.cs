@@ -4,40 +4,43 @@ namespace USP.Ganimedes.API.Model
 {
     public class Formulario
     {
-        [JsonProperty("id_parecer")]
-        public int IdParecer { get; set; }
+        [JsonProperty("id_formulario")]
+        public int idFormulario { get; set; }
 
         [JsonProperty("aluno")]
-        public string Aluno { get; set; } = "";
+        public string aluno { get; set; } = "";
 
         [JsonProperty("orientador")]
-        public string Orientador { get; set; } = "";
+        public string orientador { get; set; } = "";
 
         [JsonProperty("resultado")]
-        public int Resultado { get; set; }
+        public string resultado { get; set; }
+
+        [JsonProperty("referencia")]
+        public DateTime referencia { get; set; }
 
         [JsonProperty("artigos_em_escrita")]
-        public int ArtigosEmEscrita { get; set; }
+        public int artigosEmEscrita { get; set; }
 
         [JsonProperty("artigos_em_avaliacao")]
-        public int ArtigosEmAvaliacao { get; set; }
+        public int artigosEmAvaliacao { get; set; }
 
         [JsonProperty("artigos_aceitos")]
-        public int ArtigosAceitos { get; set; }
+        public int artigosAceitos { get; set; }
 
         [JsonProperty("atividades_academicas")]
-        public string AtividadesAcademicas { get; set; } = "";
+        public string atividadesAcademicas { get; set; } = "";
 
         [JsonProperty("atividades_pesquisa")]
-        public string AtividadesPesquisa { get; set; } = "";
+        public string atividadesPesquisa { get; set; } = "";
 
         [JsonProperty("declaracao_adicional_comissao")]
-        public string DeclaracaoAdicionalComissao { get; set; } = "";
+        public string declaracaoAdicionalComissao { get; set; } = "";
 
         [JsonProperty("dificuldade_apoio_coordenacao")]
-        public bool DificuldadeApoioCoordenacao { get; set; }
+        public bool dificuldadeApoioCoordenacao { get; set; }
 
         [JsonProperty("data_preenchimento")]
-        public DateTime DataPreenchimento { get; set; }
+        public DateTime dataPreenchimento { get; set; }
     }
 }

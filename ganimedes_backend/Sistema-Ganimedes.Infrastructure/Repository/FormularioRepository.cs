@@ -2,6 +2,7 @@
 using Dapper;
 using USP.Ganimedes.API.Model;
 using Sistema_Ganimedes.Domain.Scripts;
+using Npgsql;
 
 namespace Sistema_Ganimedes.Infrastructure.Repository
 {
@@ -14,18 +15,31 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             _dbContext = dbContext;
         }
 
-        public Formulario? GetFormulario(String nUsp)
+        public Formulario? GetFormulario(String nUspFromStudent)
         {
             var connection = _dbContext?.GetConnection();
 
-            connection!.Open();
-
-            Formulario? formulario = connection.QueryFirstOrDefault<Formulario>(FormularioScripts.GetFormulario(), new
+            Formulario? formulario = connection!.QueryFirstOrDefault<Formulario>(FormularioScripts.GetFormForStudent(), new
             {
-                nUsp = nUsp
+                nUspFromStudent = nUspFromStudent
             });
 
-            connection.Close();
+            connection!.Close();
+
+            return formulario;
+        }
+
+        public Formulario? GetFormulario(String nUspFromTeacher, String nUspFromStudent)
+        {
+            var connection = _dbContext?.GetConnection();
+
+            Formulario? formulario = connection!.QueryFirstOrDefault<Formulario>(FormularioScripts.GetFormForTeacher(), new
+            {
+                nUspFromTeacher = nUspFromTeacher,
+                nUspFromStudent = nUspFromStudent
+            });
+
+            connection!.Close();
 
             return formulario;
         }
@@ -35,9 +49,21 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public void PostFormulario(Formulario formulario)
+        public int InsertFormulario(Formulario formulario)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                var connection = _dbContext.GetConnection();
+                var rowsAffected = connection.Execute(FormularioScripts.InsertFormulario(), formulario);
+
+                return rowsAffected;
+            }
+            catch (NpgsqlException)
+            {
+                throw;
+            }
+
         }
 
         public void UpdateFormulario(Formulario formulario)

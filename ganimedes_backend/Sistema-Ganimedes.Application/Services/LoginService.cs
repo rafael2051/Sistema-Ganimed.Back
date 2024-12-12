@@ -11,13 +11,11 @@ namespace Sistema_Ganimedes.Application.Services
 
         private readonly String _authenticationServiceUrl;
         private readonly String _authenticateEndpoint;
-        private readonly String _validateTokenEndpoint;
 
         public LoginService()
         {
             _authenticationServiceUrl = Environment.GetEnvironmentVariable("AUTHENTICATION_SERVICE_URL")!;
             _authenticateEndpoint = _authenticationServiceUrl + Environment.GetEnvironmentVariable("AUTHENTICATE_ENDPOINT")!;
-            _validateTokenEndpoint = _authenticationServiceUrl + Environment.GetEnvironmentVariable("VALIDATE_TOKEN")!;
         }
 
         public async Task<LoginResponse> ValidarLogin(string email, string senha)
@@ -47,5 +45,6 @@ namespace Sistema_Ganimedes.Application.Services
             return loginResponse;
 
         }
+
     }
 }

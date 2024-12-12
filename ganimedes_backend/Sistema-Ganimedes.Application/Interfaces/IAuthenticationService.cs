@@ -8,6 +8,6 @@ namespace Sistema_Ganimedes.Application.Interfaces
 {
     public interface IAuthenticationService
     {
-        public String GenerateJWTToken(String username);
+        public Task<bool> ValidarToken(string token, string nUsp);
     }
 }

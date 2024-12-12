@@ -11,7 +11,10 @@ namespace Sistema_Ganimedes.Application.Services
     {
         public bool ValidaNUsp(string nUsp);
 
-        public Formulario? GetFormulario(string nUsp);
+        public Formulario? GetFormulario(String nUspFromStudent);
+        public Formulario? GetFormulario(String nUspFromTeacher, String nUspFromStudent);
+
+        public bool InsertFormulario(Formulario formulario);
 
     }
 }
