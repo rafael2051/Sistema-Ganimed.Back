@@ -60,6 +60,12 @@ namespace Sistema_Ganimedes.API.Controllers
             if (usuario.perfil != parecer.origem)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "Perfil de usuário diferente do perfil fornecido no parecer");
 
+            if (parecer.nUspAutorParecer != nUspFromSender)
+                return StatusCode((int)HttpStatusCode.BadRequest, "Números USP do header e do parecer divergentes");
+
+            if (parecer.conceito < 0 || parecer.conceito > 2)
+                return StatusCode((int)HttpStatusCode.BadRequest, "Conceito deve ser 0, 1 ou 2, que representam aprovado, aprovado com ressalvas e reprovado");
+
             Parecer? parecerFromDb = _parecerService.GetParecer(formulario.idFormulario, parecer.origem);
 
             try

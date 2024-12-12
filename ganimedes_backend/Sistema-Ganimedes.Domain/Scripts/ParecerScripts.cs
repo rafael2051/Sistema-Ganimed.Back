@@ -5,8 +5,8 @@
 
         public static string InsertParecer()
         {
-            return $@"INSERT INTO ganimedes.parecer(id_formulario, parecer, origem)
-	                    VALUES (@idFormulario, @parecer, @origem);";
+            return $@"INSERT INTO ganimedes.parecer(id_formulario, parecer, origem, nusp_autor_parecer, conceito)
+	                    VALUES (@idFormulario, @parecer, @origem, @nUspAutorParecer, @conceito);";
         }
 
         public static string GetParecer()
