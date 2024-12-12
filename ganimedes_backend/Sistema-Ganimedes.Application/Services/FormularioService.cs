@@ -45,6 +45,16 @@ namespace Sistema_Ganimedes.Application.Services
             return _formularioRepository.GetFormulario(nUspFromTeacher, nUspFromStudent);
         }
 
+        public Formulario? GetFormularioById(int idFormulario)
+        {
+            return _formularioRepository.GetFormularioById(idFormulario);
+        }
+
+        public Formulario? GetFormularioByNuspAluno(int nUspFromStudent)
+        {
+            return _formularioRepository.GetFormularioByNuspAluno(nUspFromStudent);
+        }
+
         public bool InsertFormulario(Formulario formulario)
         {
             try
@@ -63,6 +73,11 @@ namespace Sistema_Ganimedes.Application.Services
         public IEnumerable<FormMetaData> GetFormsMetadata(String nUspFromTeacher)
         {
             return _formularioRepository.GetFormsMetadataRelatedToTeacher(nUspFromTeacher);
+        }
+
+        public IEnumerable<FormMetaData> GetFormsMetadataForCcp(String nUspFromCcpUser)
+        {
+            return _formularioRepository.GetFormsMetadataRelatedToCcp(nUspFromCcpUser);
         }
 
         public bool UpdateForm(Formulario formulario)

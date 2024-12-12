@@ -57,6 +57,44 @@ namespace Sistema_Ganimedes.Domain.Scripts
 	                    where nusp_aluno = @nUspFromStudent;";
         }
 
+        public static string GetFormById()
+        {
+            return $@"SELECT id_formulario as idFormulario,
+                        nusp_aluno as aluno,
+                        nusp_orientador as orientador,
+                        resultado,
+                        referencia,
+                        artigos_em_escrita as artigosEmEscrita,
+                        artigos_em_avaliacao as artigosEmAvaliacao,
+                        artigos_aceitos as artigosAceitos,
+                        atividades_academicas as atividadesAcademicas,
+                        atividades_pesquisa as atividadesPesquisa,
+                        declaracao_adicional_comissao as declaracaoAdicionalComissao,
+                        dificuldade_apoio_coordenacao as dificuldadeApoioCoordenacao,
+                        data_preenchimento as dataPreenchimento
+                        from ganimedes.formulario
+	                    where id_formulario = @idFormulario;";
+        }
+
+        public static string GetFormByNuspAluno()
+        {
+            return $@"SELECT id_formulario as idFormulario,
+                        nusp_aluno as aluno,
+                        nusp_orientador as orientador,
+                        resultado,
+                        referencia,
+                        artigos_em_escrita as artigosEmEscrita,
+                        artigos_em_avaliacao as artigosEmAvaliacao,
+                        artigos_aceitos as artigosAceitos,
+                        atividades_academicas as atividadesAcademicas,
+                        atividades_pesquisa as atividadesPesquisa,
+                        declaracao_adicional_comissao as declaracaoAdicionalComissao,
+                        dificuldade_apoio_coordenacao as dificuldadeApoioCoordenacao,
+                        data_preenchimento as dataPreenchimento
+                        from ganimedes.formulario
+	                where nusp_aluno = @nUspFromStudent;";
+        }
+
         public static string GetFormsMetadataRelatedToTeacher()
         {
             return $@"select id_formulario as idFormulario,
@@ -68,6 +106,18 @@ namespace Sistema_Ganimedes.Domain.Scripts
 	                    inner join ganimedes.usuario u
 	                    on a.nusp = u.nusp
 	                    where f.nusp_orientador = @nUspFromTeacher;";
+        }
+
+        public static string GetFormsMetadataRelatedToCcp()
+        {
+            return $@"select id_formulario as idFormulario,
+		                    nusp_aluno as nUspAluno,
+		                    nome as nome
+	                    from ganimedes.formulario f
+	                    inner join ganimedes.aluno a
+	                    on f.nusp_aluno = a.nusp
+	                    inner join ganimedes.usuario u
+	                    on a.nusp = u.nusp";
         }
 
         public static string UpdateForm()
