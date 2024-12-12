@@ -45,6 +45,36 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             return formulario;
         }
 
+        public Formulario? GetFormularioById(int idFormulario)
+        {
+
+            var connection = _dbContext?.GetConnection();
+
+            Formulario? formulario = connection!.QueryFirstOrDefault<Formulario>(FormularioScripts.GetFormById(), new
+            {
+                idFormulario
+            });
+
+            connection!.Close();
+
+            return formulario;
+
+        }
+
+        public Formulario? GetFormularioByNuspAluno(int nUspFromStudent)
+        {
+            var connection = _dbContext?.GetConnection();
+
+            Formulario? formulario = connection!.QueryFirstOrDefault<Formulario>(FormularioScripts.GetFormByNuspAluno(), new
+            {
+                nUspFromStudent = nUspFromStudent
+            });
+
+            connection!.Close();
+
+            return formulario;
+        }
+
         public ICollection<Formulario> GetFormularios()
         {
             throw new NotImplementedException();
@@ -94,6 +124,25 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
             catch (NpgsqlException)
             {  
                 throw; 
+            }
+        }
+
+        public IEnumerable<FormMetaData> GetFormsMetadataRelatedToCcp(String nUspFromCcpUser)
+        {
+            try
+            {
+                var connection = _dbContext?.GetConnection();
+
+                var formsMetaData = connection!.Query<FormMetaData>(FormularioScripts.GetFormsMetadataRelatedToCcp());
+
+                connection!.Close();
+
+                return formsMetaData;
+
+            }
+            catch (NpgsqlException)
+            {
+                throw;
             }
         }
 

@@ -11,7 +11,6 @@ namespace Sistema_Ganimedes.Infrastructure
         {
 
             services.AddScoped<IFormularioRepository, FormularioRepository>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<INotificacaoRepository, NotificacaoRepository>();
             services.AddScoped<IParecerRepository, ParecerRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();

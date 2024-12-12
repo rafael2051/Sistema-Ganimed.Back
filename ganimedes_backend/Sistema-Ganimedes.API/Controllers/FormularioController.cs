@@ -35,6 +35,7 @@ namespace Sistema_Ganimedes.API.Controllers
             string nUspFromSender;
             String? nUspFromStudent = nUsp;
             bool requestMadeByTeacher = false;
+            bool requestMadeByCcp = false;
 
             if (authenticationValue.Count() == 0)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
@@ -57,10 +58,15 @@ namespace Sistema_Ganimedes.API.Controllers
                 if (docente is null)
                     return StatusCode((int)HttpStatusCode.NotFound, "Docente não cadastrado no banco");
 
-                if (docente.perfil != "DOCENTE")
-                    return StatusCode((int)HttpStatusCode.Unauthorized, "Apenas docentes podem acessar esse recurso");
+                if (docente.perfil == "ALUNO")
+                    return StatusCode((int)HttpStatusCode.Unauthorized, "Apenas docentes/ccp podem acessar esse recurso");
 
-                requestMadeByTeacher = true;
+                if(docente.perfil == "DOCENTE")
+                    requestMadeByTeacher = true;
+
+                if(docente.perfil == "CCP")
+                    requestMadeByCcp = true;
+
             }
             else
                 nUspFromSender = nUsp;
@@ -71,6 +77,8 @@ namespace Sistema_Ganimedes.API.Controllers
 
             Formulario? formulario;
 
+            if (requestMadeByCcp)
+                formulario = _formularioService.GetFormulario(nUspFromStudent);
             if (requestMadeByTeacher)
                 formulario = _formularioService.GetFormulario(nUspFromSender, nUspFromStudent);
             else
@@ -98,14 +106,19 @@ namespace Sistema_Ganimedes.API.Controllers
             if (usuario is null)
                 return StatusCode((int)HttpStatusCode.NotFound, "O número usp fornecido na url não está cadastrado no banco");
 
-            if (usuario.perfil != "DOCENTE")
-                return StatusCode((int)HttpStatusCode.BadRequest, "Forneca o número USP de um aluno na url");
+            if (usuario.perfil == "ALUNO")
+                return StatusCode((int)HttpStatusCode.BadRequest, "Forneca o número USP de um docente/ccp na url");
 
             //Autenticar número USP
             if (!await _authenticationService.ValidarToken(token, nUsp))
                 return StatusCode((int)HttpStatusCode.Unauthorized, "Token inválido");
 
-            IEnumerable<FormMetaData> formsMetaData = _formularioService.GetFormsMetadata(nUsp);
+            IEnumerable<FormMetaData> formsMetaData;
+
+            if(usuario.perfil == "DOCENTE")
+                formsMetaData = _formularioService.GetFormsMetadata(nUsp);
+            else
+                formsMetaData = _formularioService.GetFormsMetadataForCcp(nUsp);
 
             return StatusCode((int)HttpStatusCode.OK, JsonConvert.SerializeObject(formsMetaData));
 
