@@ -1,4 +1,6 @@
-﻿namespace Sistema_Ganimedes.Domain.Scripts
+﻿using Sistema_Ganimedes.Domain.Entities;
+
+namespace Sistema_Ganimedes.Domain.Scripts
 {
     public static class UsuarioScripts
     {
@@ -19,14 +21,32 @@
 
         public static string GetUsuario(string nUsp)
         {
-            return $@"select * from ganimedes.usuario
-	                where nusp='{nUsp}';";
+            return $@"SELECT nusp,
+                            nome,
+                            email,
+                            password,
+                            link_lattes as linkLattes,
+                            dt_atualizacao_lattes as dtAtualizacaoLattes,
+                            perfil
+	                    FROM ganimedes.usuario
+                        WHERE nusp='{nUsp}';";
         }
 
         public static string GetAluno(string nUsp)
         {
-            return $@"select * from ganimedes.aluno 
-	                    where nusp='{nUsp}';";
+            return $@"SELECT nusp, 
+                            curso, 
+                            ano_ingresso as anoIngresso, 
+                            exame_proficiencia as exameProficiencia,
+                            exame_qualificacao as exameQualificacao, 
+                            prazo_maximo_qualificacao as prazoMaximoQualificacao, 
+                            prazo_maximo_deposito_tese as prazoMaximoDepositoTese, 
+                            orientador, 
+                            rg, 
+                            dt_nascimento as dtNascimento, 
+                            nacionalidade
+	                FROM ganimedes.aluno
+                    WHERE nusp='{nUsp}';";
         }
 
     }

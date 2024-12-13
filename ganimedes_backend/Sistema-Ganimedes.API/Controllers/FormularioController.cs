@@ -29,7 +29,7 @@ namespace Sistema_Ganimedes.API.Controllers
         public async Task<IActionResult> GetFormulario(string nUsp)
         {
 
-            Request.Headers.TryGetValue("Authentication", out StringValues authenticationValue);
+            Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
             Request.Headers.TryGetValue("Nusp_professor", out StringValues nUspFromTeacher);
 
             string nUspFromSender;
@@ -93,7 +93,7 @@ namespace Sistema_Ganimedes.API.Controllers
         public async Task<IActionResult> GetFormularios(string nUsp)
         {
             //Verificar se token foi enviado como header na request
-            Request.Headers.TryGetValue("Authentication", out StringValues authenticationValue);
+            Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
 
             if (authenticationValue.Count() == 0)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
@@ -129,7 +129,7 @@ namespace Sistema_Ganimedes.API.Controllers
         public async Task<IActionResult> PostFormulario(Formulario formulario)
         {
 
-            Request.Headers.TryGetValue("Authentication", out StringValues authenticationValue);
+            Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
 
             if (authenticationValue.Count() == 0)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
