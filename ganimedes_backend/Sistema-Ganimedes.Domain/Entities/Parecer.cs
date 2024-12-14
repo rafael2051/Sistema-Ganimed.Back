@@ -21,7 +21,7 @@ namespace Sistema_Ganimedes.Domain.Entities
         public String nUspAutorParecer { get; set; }
 
         [JsonProperty("conceito")]
-        public int conceito { get; set; }
+        public Conceito conceito { get; set; }
 
     }
 }

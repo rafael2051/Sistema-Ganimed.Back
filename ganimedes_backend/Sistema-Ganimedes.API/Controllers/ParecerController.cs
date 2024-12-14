@@ -29,8 +29,8 @@ namespace Sistema_Ganimedes.API.Controllers
         [HttpPost("/postParecer")]
         public async Task<IActionResult> PostParecer(Parecer parecer)
         {
-            Request.Headers.TryGetValue("Authentication", out StringValues authenticationValue);
-            Request.Headers.TryGetValue("Nusp_emissor_do_parecer", out StringValues nUspFromSender);
+            Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
+            Request.Headers.TryGetValue("Nusp", out StringValues nUspFromSender);
 
             if (authenticationValue.Count() == 0 || nUspFromSender.Count() == 0)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
@@ -63,8 +63,6 @@ namespace Sistema_Ganimedes.API.Controllers
             if (parecer.nUspAutorParecer != nUspFromSender)
                 return StatusCode((int)HttpStatusCode.BadRequest, "Números USP do header e do parecer divergentes");
 
-            if (parecer.conceito < 0 || parecer.conceito > 2)
-                return StatusCode((int)HttpStatusCode.BadRequest, "Conceito deve ser 0, 1 ou 2, que representam aprovado, aprovado com ressalvas e reprovado");
 
             Parecer? parecerFromDb = _parecerService.GetParecer(formulario.idFormulario, parecer.origem);
 

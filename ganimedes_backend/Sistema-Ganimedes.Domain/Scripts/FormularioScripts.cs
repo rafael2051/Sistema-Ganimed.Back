@@ -23,8 +23,6 @@ namespace Sistema_Ganimedes.Domain.Scripts
             return $@"select id_formulario as idFormulario,
                         nusp_aluno as aluno,
                         nusp_orientador as orientador,
-                        resultado,
-                        referencia,
                         artigos_em_escrita as artigosEmEscrita,
                         artigos_em_avaliacao as artigosEmAvaliacao,
                         artigos_aceitos as artigosAceitos,
@@ -43,8 +41,6 @@ namespace Sistema_Ganimedes.Domain.Scripts
             return $@"select id_formulario as idFormulario,
                         nusp_aluno as aluno,
                         nusp_orientador as orientador,
-                        resultado,
-                        referencia,
                         artigos_em_escrita as artigosEmEscrita,
                         artigos_em_avaliacao as artigosEmAvaliacao,
                         artigos_aceitos as artigosAceitos,
@@ -62,8 +58,6 @@ namespace Sistema_Ganimedes.Domain.Scripts
             return $@"SELECT id_formulario as idFormulario,
                         nusp_aluno as aluno,
                         nusp_orientador as orientador,
-                        resultado,
-                        referencia,
                         artigos_em_escrita as artigosEmEscrita,
                         artigos_em_avaliacao as artigosEmAvaliacao,
                         artigos_aceitos as artigosAceitos,
@@ -81,8 +75,6 @@ namespace Sistema_Ganimedes.Domain.Scripts
             return $@"SELECT id_formulario as idFormulario,
                         nusp_aluno as aluno,
                         nusp_orientador as orientador,
-                        resultado,
-                        referencia,
                         artigos_em_escrita as artigosEmEscrita,
                         artigos_em_avaliacao as artigosEmAvaliacao,
                         artigos_aceitos as artigosAceitos,
@@ -110,20 +102,22 @@ namespace Sistema_Ganimedes.Domain.Scripts
 
         public static string GetFormsMetadataRelatedToCcp()
         {
-            return $@"select id_formulario as idFormulario,
+            return $@"select f.id_formulario as idFormulario,
 		                    nusp_aluno as nUspAluno,
 		                    nome as nome
 	                    from ganimedes.formulario f
 	                    inner join ganimedes.aluno a
 	                    on f.nusp_aluno = a.nusp
 	                    inner join ganimedes.usuario u
-	                    on a.nusp = u.nusp";
+	                    on a.nusp = u.nusp
+						inner join ganimedes.parecer p
+						on f.id_formulario = p.id_formulario;";
         }
 
         public static string UpdateForm()
         {
             return $@"UPDATE ganimedes.formulario
-	                    SET nusp_aluno=@aluno, nusp_orientador=@orientador, resultado=@resultado, referencia=@referencia, artigos_em_escrita=@artigosEmEscrita, artigos_em_avaliacao=@artigosEmAvaliacao, artigos_aceitos=@artigosAceitos, atividades_academicas=@atividadesAcademicas, atividades_pesquisa=@atividadesPesquisa, declaracao_adicional_comissao=@declaracaoAdicionalComissao, dificuldade_apoio_coordenacao=@dificuldadeApoioCoordenacao, data_preenchimento=@dataPreenchimento
+	                    SET nusp_aluno=@aluno, nusp_orientador=@orientador, artigos_em_escrita=@artigosEmEscrita, artigos_em_avaliacao=@artigosEmAvaliacao, artigos_aceitos=@artigosAceitos, atividades_academicas=@atividadesAcademicas, atividades_pesquisa=@atividadesPesquisa, declaracao_adicional_comissao=@declaracaoAdicionalComissao, dificuldade_apoio_coordenacao=@dificuldadeApoioCoordenacao, data_preenchimento=@dataPreenchimento
 	                    WHERE nusp_aluno = @aluno;";
         }
 

@@ -1,38 +1,38 @@
 # SISTEMA-GANIMEDES
 
-Este projeto contém a API do sistema Ganimedes, um sistema desenvolvido por
-alunos da USP para fazer a gestão das avaliações semestrais na pós-graduação.
+Este projeto contÃ©m a API do sistema Ganimedes, um sistema desenvolvido por
+alunos da USP para fazer a gestÃ£o das avaliaÃ§Ãµes semestrais na pï¿½s-graduaï¿½ï¿½o.
 
-## ESPECIFICAÇÕES
+## ESPECIFICAï¿½ï¿½ES
 
-	Linguagem de programação: C#
-	Versão do .NET: 8.0
+	Linguagem de programaï¿½ï¿½o: C#
+	Versï¿½o do .NET: 8.0
 
 ## ARQUITETURA
 
-Este projeto segue um padrão DDD, com quatro camadas:
+Este projeto segue um padrï¿½o DDD, com quatro camadas:
 
 * API
 * Application
 * Domain
 * Infrastructure
 
-A camada de API é o entry point da aplicação e contém as rotas; <br>
-A camada Application contém as regras de negócio; <br>
-A camada Domain contém as entidades do sistema; <br>
-A camada Infrastructure faz a comunicação com o banco; <br>
+A camada de API ï¿½ o entry point da aplicaï¿½ï¿½o e contï¿½m as rotas; <br>
+A camada Application contï¿½m as regras de negï¿½cio; <br>
+A camada Domain contï¿½m as entidades do sistema; <br>
+A camada Infrastructure faz a comunicaï¿½ï¿½o com o banco; <br>
 
 # ENDPOINTS
 
-## Formulários
+## Formulï¿½rios
 
-### Recuperar formulários
+### Recuperar formulï¿½rios
 
 `/getFormularios/NUSP/tipoUsuario?dataInicio=mm/yyyy&dataFim=mm/yyyy`
 
-|	Parâmetro	|	Tipo	|	OBS 						|
+|	Parï¿½metro	|	Tipo	|	OBS 						|
 |		:---:	|	:---:	|	:---:						|
-|		NUSP	|	int32	|	Número USP do usuário		|
+|		NUSP	|	int32	|	Nï¿½mero USP do usuï¿½rio		|
 |tipoUsuario|enum|ALUNO / ORIENTADOR / CCP|
 |dataInicio|datatime|Opcional|
 |dataFim|datetime|Opcional|

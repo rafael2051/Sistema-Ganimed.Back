@@ -19,6 +19,15 @@ namespace Sistema_Ganimedes.API.Controllers
             _usuarioService = usuarioService;
         }
 
+        [HttpGet("/ping/{str}")]
+        public IActionResult Ping(String str)
+        {
+
+            Console.WriteLine(str);
+            return StatusCode((int)HttpStatusCode.OK, JsonConvert.SerializeObject(new ResponseMessage(str)));
+            
+        }
+
         [HttpPost("/registerUser")]
         public IActionResult RegisterUser(Usuario usuario)
         {

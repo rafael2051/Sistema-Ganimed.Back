@@ -30,7 +30,7 @@ namespace Sistema_Ganimedes.API.Controllers
         {
 
             Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
-            Request.Headers.TryGetValue("Nusp_professor", out StringValues nUspFromTeacher);
+            Request.Headers.TryGetValue("Nusp", out StringValues nUspFromTeacher);
 
             string nUspFromSender;
             String? nUspFromStudent = nUsp;
@@ -89,16 +89,18 @@ namespace Sistema_Ganimedes.API.Controllers
 
         }
 
-        [HttpGet("/getFormsMetaData/{nUsp}")]
-        public async Task<IActionResult> GetFormularios(string nUsp)
+        [HttpGet("/getFormsMetaData")]
+        public async Task<IActionResult> GetFormularios()
         {
             //Verificar se token foi enviado como header na request
             Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
+            Request.Headers.TryGetValue("Nusp", out StringValues nUspValue);
 
-            if (authenticationValue.Count() == 0)
+            if (authenticationValue.Count() == 0 || nUspValue.Count == 0)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
 
             string token = authenticationValue.ToString();
+            string nUsp = nUspValue.ToString();
 
             //Verificar se número usp enviado é de um docente
             Usuario? usuario = _usuarioService.GetDadosUsuario(nUsp);

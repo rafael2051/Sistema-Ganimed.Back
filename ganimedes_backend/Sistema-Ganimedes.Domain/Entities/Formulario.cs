@@ -13,13 +13,6 @@ namespace USP.Ganimedes.API.Model
         [JsonProperty("orientador")]
         public string orientador { get; set; } = "";
 
-        [JsonIgnore]
-        [JsonProperty("resultado")]
-        public string resultado { get; set; }
-
-        [JsonProperty("referencia")]
-        public DateTime referencia { get; set; }
-
         [JsonProperty("artigos_em_escrita")]
         public int artigosEmEscrita { get; set; }
 

@@ -17,10 +17,10 @@ namespace Sistema_Ganimedes.Domain.Entities
         [JsonProperty("senha")]
         public string password { get; set; }
 
-        [JsonProperty("link_lattes")]
+        [JsonProperty("linkLattes")]
         public string linkLattes { get; set; }
 
-        [JsonProperty("dt_atualizacao_lattes")]
+        [JsonProperty("dtAtualizacaoLattes")]
         public DateTime dtAtualizacaoLattes { get; set; }
 
         [JsonProperty("perfil")]
