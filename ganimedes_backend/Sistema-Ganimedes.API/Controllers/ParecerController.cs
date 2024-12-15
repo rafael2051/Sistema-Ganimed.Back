@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
 using Sistema_Ganimedes.Application.Interfaces;
 using Sistema_Ganimedes.Application.Services;
 using Sistema_Ganimedes.Domain.Entities;
@@ -38,16 +39,22 @@ namespace Sistema_Ganimedes.API.Controllers
             string token = authenticationValue.ToString();
             string nUsp = nUspFromSender.ToString();
 
-            Usuario? usuario = _usuarioService.GetDadosUsuario(nUsp);
-
             if (!await _authenticationService.ValidarToken(token, nUsp))
                 return StatusCode((int)HttpStatusCode.Unauthorized, "Token inválido");
+
+            Usuario? usuario = _usuarioService.GetDadosUsuario(nUsp);
 
             if (usuario is null)
                 return StatusCode((int)HttpStatusCode.NotFound, "Não existe registro para docente/cpp no banco de dados para o número usp fornecido");
 
             if (usuario.perfil != "DOCENTE" && usuario.perfil != "CCP")
                 return StatusCode((int)HttpStatusCode.Unauthorized, "Apenas docentes e ccp tem permissão para fazer essa operação");
+
+            if (usuario.perfil != parecer.origem)
+                return StatusCode((int)HttpStatusCode.Unauthorized, "Perfil de usuário diferente do perfil fornecido no parecer");
+
+            if (parecer.nUspAutorParecer != nUspFromSender)
+                return StatusCode((int)HttpStatusCode.BadRequest, "Números USP do header e do parecer divergentes");
 
             Formulario? formulario = _formularioService.GetFormularioById(parecer.idFormulario);
 
@@ -56,12 +63,6 @@ namespace Sistema_Ganimedes.API.Controllers
 
             if(usuario.perfil == "DOCENTE" && usuario.nUsp != formulario.orientador)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "O número usp fornecido não é o mesmo do orientador responsável pelo formulário fornecido");
-
-            if (usuario.perfil != parecer.origem)
-                return StatusCode((int)HttpStatusCode.Unauthorized, "Perfil de usuário diferente do perfil fornecido no parecer");
-
-            if (parecer.nUspAutorParecer != nUspFromSender)
-                return StatusCode((int)HttpStatusCode.BadRequest, "Números USP do header e do parecer divergentes");
 
 
             Parecer? parecerFromDb = _parecerService.GetParecer(formulario.idFormulario, parecer.origem);
@@ -95,6 +96,35 @@ namespace Sistema_Ganimedes.API.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
 
+        }
+
+        [HttpGet("/getParecer/{idFormulario}")]
+        public async Task<IActionResult> GetParecer(int idFormulario, [FromQuery] string origem)
+        {
+            Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
+            Request.Headers.TryGetValue("Nusp", out StringValues nUspFromSender);
+
+            if (authenticationValue.Count() == 0 || nUspFromSender.Count() == 0)
+                return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");
+
+            string token = authenticationValue.ToString();
+            string nUsp = nUspFromSender.ToString();
+
+            if (!await _authenticationService.ValidarToken(token, nUsp))
+                return StatusCode((int)HttpStatusCode.Unauthorized, "Token inválido");
+
+            Usuario? usuario = _usuarioService.GetDadosUsuario(nUsp);
+
+            if (usuario is null)
+                return StatusCode((int)HttpStatusCode.NotFound, "Não existe registro para docente/cpp no banco de dados para o número usp fornecido");
+
+            if (usuario.perfil != "DOCENTE" && usuario.perfil != "CCP")
+                return StatusCode((int)HttpStatusCode.Unauthorized, "Apenas docentes e ccp tem permissão para fazer essa operação");
+
+            var parecer = _parecerService.GetParecer(idFormulario, origem);
+
+            return StatusCode((int)HttpStatusCode.OK, JsonConvert.SerializeObject(parecer));
+            
         }
 
     }

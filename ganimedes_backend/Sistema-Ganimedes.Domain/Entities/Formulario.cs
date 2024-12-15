@@ -13,6 +13,9 @@ namespace USP.Ganimedes.API.Model
         [JsonProperty("orientador")]
         public string orientador { get; set; } = "";
 
+        [JsonProperty("nome_aluno")]
+        public string nomeAluno { get; set; } = "";
+
         [JsonProperty("artigos_em_escrita")]
         public int artigosEmEscrita { get; set; }
 
@@ -36,5 +39,15 @@ namespace USP.Ganimedes.API.Model
 
         [JsonProperty("data_preenchimento")]
         public DateTime dataPreenchimento { get; set; }
+
+        [JsonProperty("aprovacoes_todo_curso")]
+        public int aprovacoesTodoCurso { get; set; }
+
+        [JsonProperty("reprovacoes_semestre_atual")]
+        public int reprovacoesSemestreAtual { get; set; }
+
+        [JsonProperty("reprovacoes_todo_curso")]
+        public int reprovacoesTodoCurso { get; set; }
+
     }
 }

@@ -14,7 +14,8 @@
             return $@"SELECT id_parecer as idParecer, 
                         id_formulario as idFormulario,
                         parecer as parecer,
-                        origem as origem
+                        origem as origem,
+                        nusp_autor_parecer as nUspAutorParecer
 	                  FROM ganimedes.parecer
                       WHERE id_formulario = @idFormulario
                       AND origem = @origem;";

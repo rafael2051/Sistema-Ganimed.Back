@@ -46,8 +46,9 @@ namespace Sistema_Ganimedes.Infrastructure.Repository
                 connection.Close();
                 return rowsAffected;
             }
-            catch (NpgsqlException)
+            catch (NpgsqlException ex)
             {
+                Console.WriteLine(ex.Message);
                 connection.Close();
                 throw;
             }

@@ -16,7 +16,7 @@ namespace Sistema_Ganimedes.Domain.Scripts
         {
             return $@"INSERT INTO ganimedes.aluno(
 	                nusp, curso, ano_ingresso, exame_proficiencia, exame_qualificacao, prazo_maximo_qualificacao, prazo_maximo_deposito_tese, orientador, rg, dt_nascimento, nacionalidade)
-	                VALUES (@nUsp, @curso, @anoIngresso, @exameProficiencia, @exameQualificacao, @prazoMaximoQualificacao, @prazoMaximoDepositoTese, @orientador, @rg, @dataNascimento, @nacionalidade);";
+	                VALUES (@nUsp, @curso, @anoIngresso, @exameProficiencia, @exameQualificacao, @prazoMaximoQualificacao, @prazoMaximoDepositoTese, @orientador, @rg, @dtNascimento, @nacionalidade);";
         }
 
         public static string GetUsuario(string nUsp)

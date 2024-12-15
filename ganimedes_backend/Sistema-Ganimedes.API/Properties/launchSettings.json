@@ -13,7 +13,8 @@
         "USERNAME": "admin",
         "AUTHENTICATION_SERVICE_URL": "http://localhost:8080",
         "AUTHENTICATE_ENDPOINT": "/authenticate",
-        "VALIDATE_TOKEN": "/validateToken/@nUsp"
+        "VALIDATE_TOKEN": "/validateToken/@nUsp",
+        "PRAZO": "12/15/2024"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7260;http://localhost:5000"

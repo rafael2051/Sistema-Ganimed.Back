@@ -6,6 +6,7 @@ using USP.Ganimedes.API.Model;
 using Sistema_Ganimedes.Application.Interfaces;
 using Newtonsoft.Json;
 using Sistema_Ganimedes.Domain.Entities;
+using System.Globalization;
 
 namespace Sistema_Ganimedes.API.Controllers
 {
@@ -16,13 +17,16 @@ namespace Sistema_Ganimedes.API.Controllers
         private IFormularioService _formularioService;
         private IAuthenticationService _authenticationService;
         private IUsuarioService _usuarioService;
+        private IParecerService _parecerService;
+        private readonly static DateTime _prazo = DateTime.ParseExact(System.Environment.GetEnvironmentVariable("prazo")!, "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
         public FormularioController(IFormularioService formularioService, IAuthenticationService authenticationService,
-                                        IUsuarioService usuarioService)
+                                        IUsuarioService usuarioService, IParecerService parecerService)
         {
             _formularioService = formularioService;
             _authenticationService = authenticationService;
             _usuarioService = usuarioService;
+            _parecerService = parecerService;
         }
 
         [HttpGet("/getForm/{nUsp}")]
@@ -42,12 +46,12 @@ namespace Sistema_Ganimedes.API.Controllers
 
             string token = authenticationValue.ToString();
 
-            Usuario? usuario = _usuarioService.GetDadosUsuario(nUsp);
+            Usuario? aluno = _usuarioService.GetDadosUsuario(nUsp);
 
-            if (usuario is null)
+            if (aluno is null)
                 return StatusCode((int)HttpStatusCode.NotFound, "O número usp fornecido na url não está cadastrado no banco");
 
-            if (usuario.perfil != "ALUNO")
+            if (aluno.perfil != "ALUNO")
                 return StatusCode((int)HttpStatusCode.BadRequest, "Forneca o número USP de um aluno na url");
 
             if (nUspFromTeacher.Count() > 0)
@@ -83,10 +87,11 @@ namespace Sistema_Ganimedes.API.Controllers
                 formulario = _formularioService.GetFormulario(nUspFromSender, nUspFromStudent);
             else
                 formulario = _formularioService.GetFormulario(nUspFromStudent);
-    
+
+            if(formulario is not null)
+                formulario!.nomeAluno = aluno.nome;
 
             return StatusCode((int)HttpStatusCode.Accepted, JsonConvert.SerializeObject(formulario));
-
         }
 
         [HttpGet("/getFormsMetaData")]
@@ -122,8 +127,15 @@ namespace Sistema_Ganimedes.API.Controllers
             else
                 formsMetaData = _formularioService.GetFormsMetadataForCcp(nUsp);
 
-            return StatusCode((int)HttpStatusCode.OK, JsonConvert.SerializeObject(formsMetaData));
+            foreach(var formMetadata in formsMetaData)
+            {
+                if(_parecerService.GetParecer(formMetadata.idFormulario, usuario.perfil) is not null)
+                {
+                    formMetadata.parecerDado = true;
+                }
+            }
 
+            return StatusCode((int)HttpStatusCode.OK, JsonConvert.SerializeObject(formsMetaData));
 
         }
 
@@ -141,7 +153,8 @@ namespace Sistema_Ganimedes.API.Controllers
             if (!await _authenticationService.ValidarToken(token, formulario.aluno))
                 return StatusCode((int)HttpStatusCode.Unauthorized, "Token inválido");
 
-
+            if(DateTime.Now > _prazo)
+                return StatusCode((int)HttpStatusCode.PreconditionFailed, "Acabou o prazo para submeter o formulário!");
 
             try 
             {
@@ -169,7 +182,7 @@ namespace Sistema_Ganimedes.API.Controllers
         public async Task<IActionResult> UpdateFormulario(Formulario formulario)
         {
 
-            Request.Headers.TryGetValue("Authentication", out StringValues authenticationValue);
+            Request.Headers.TryGetValue("Authorization", out StringValues authenticationValue);
 
             if (authenticationValue.Count() == 0)
                 return StatusCode((int)HttpStatusCode.Unauthorized, "É necessário fornecer um token de autenticação para acessar esse recurso");

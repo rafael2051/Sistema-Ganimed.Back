@@ -32,7 +32,7 @@ namespace Sistema_Ganimedes.Domain.Entities
         public String rg { get; set; }
 
         [JsonProperty("dt_nascimento")]
-        public DateTime dataNascimento { get; set; }
+        public DateTime dtNascimento { get; set; }
 
         [JsonProperty("nacionalidade")]
         public String nacionalidade { get; set; }
