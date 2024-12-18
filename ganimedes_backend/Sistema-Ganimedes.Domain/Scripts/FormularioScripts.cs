@@ -13,9 +13,9 @@ namespace Sistema_Ganimedes.Domain.Scripts
         {
             return $@"INSERT INTO ganimedes.formulario(nusp_aluno, nusp_orientador, artigos_em_escrita, artigos_em_avaliacao, artigos_aceitos,
                     atividades_academicas, atividades_pesquisa, declaracao_adicional_comissao,
-                    dificuldade_apoio_coordenacao, data_preenchimento, aprovacoes_todo_curso, reprovacoes_semestre_atual, reprovacoes_todo_curso)
+                    dificuldade_apoio_coordenacao, disciplinas_conceito_divulgado, data_preenchimento, aprovacoes_todo_curso, reprovacoes_semestre_atual, reprovacoes_todo_curso)
 	                VALUES (@aluno, @orientador, @artigosEmEscrita, @artigosEmAvaliacao, @artigosAceitos, @atividadesAcademicas, @atividadesPesquisa, 
-                    @declaracaoAdicionalComissao, @dificuldadeApoioCoordenacao, @dataPreenchimento, @aprovacoesTodoCurso, @reprovacoesSemestreAtual,
+                    @declaracaoAdicionalComissao, @dificuldadeApoioCoordenacao, @disciplinasConceitoDivulgado, @dataPreenchimento, @aprovacoesTodoCurso, @reprovacoesSemestreAtual,
                     @reprovacoesSemestreAtual);";
         }
 
@@ -52,6 +52,7 @@ namespace Sistema_Ganimedes.Domain.Scripts
                         atividades_pesquisa as atividadesPesquisa,
                         declaracao_adicional_comissao as declaracaoAdicionalComissao,
                         dificuldade_apoio_coordenacao as dificuldadeApoioCoordenacao,
+                        disciplinas_conceito_divulgado as disciplinasConceitoDivulgado,
                         data_preenchimento as dataPreenchimento,
                         aprovacoes_todo_curso as aprovacoesTodoCurso,
                         reprovacoes_semestre_atual as reprovacoesSemestreAtual,
@@ -72,6 +73,7 @@ namespace Sistema_Ganimedes.Domain.Scripts
                         atividades_pesquisa as atividadesPesquisa,
                         declaracao_adicional_comissao as declaracaoAdicionalComissao,
                         dificuldade_apoio_coordenacao as dificuldadeApoioCoordenacao,
+                        disciplinas_conceito_divulgado as disciplinasConceitoDivulgado,
                         data_preenchimento as dataPreenchimento,
                         aprovacoes_todo_curso as aprovacoesTodoCurso,
                         reprovacoes_semestre_atual as reprovacoesSemestreAtual,
@@ -92,6 +94,7 @@ namespace Sistema_Ganimedes.Domain.Scripts
                         atividades_pesquisa as atividadesPesquisa,
                         declaracao_adicional_comissao as declaracaoAdicionalComissao,
                         dificuldade_apoio_coordenacao as dificuldadeApoioCoordenacao,
+                        disciplinas_conceito_divulgado as disciplinasConceitoDivulgado,
                         data_preenchimento as dataPreenchimento,
                         aprovacoes_todo_curso as aprovacoesTodoCurso,
                         reprovacoes_semestre_atual as reprovacoesSemestreAtual,
@@ -131,7 +134,7 @@ namespace Sistema_Ganimedes.Domain.Scripts
         public static string UpdateForm()
         {
             return $@"UPDATE ganimedes.formulario
-	                    SET nusp_aluno=@aluno, nusp_orientador=@orientador, artigos_em_escrita=@artigosEmEscrita, artigos_em_avaliacao=@artigosEmAvaliacao, artigos_aceitos=@artigosAceitos, atividades_academicas=@atividadesAcademicas, atividades_pesquisa=@atividadesPesquisa, declaracao_adicional_comissao=@declaracaoAdicionalComissao, dificuldade_apoio_coordenacao=@dificuldadeApoioCoordenacao, data_preenchimento=@dataPreenchimento, aprovacoes_todo_curso = @aprovacoesTodoCurso, reprovacoes_semestre_atual = @reprovacoesSemestreAtual, reprovacoes_todo_curso = @reprovacoesSemestreAtual
+	                    SET nusp_aluno=@aluno, nusp_orientador=@orientador, artigos_em_escrita=@artigosEmEscrita, artigos_em_avaliacao=@artigosEmAvaliacao, artigos_aceitos=@artigosAceitos, atividades_academicas=@atividadesAcademicas, atividades_pesquisa=@atividadesPesquisa, declaracao_adicional_comissao=@declaracaoAdicionalComissao, dificuldade_apoio_coordenacao=@dificuldadeApoioCoordenacao, disciplinas_conceito_divulgado = @disciplinasConceitoDivulgado, data_preenchimento=@dataPreenchimento, aprovacoes_todo_curso = @aprovacoesTodoCurso, reprovacoes_semestre_atual = @reprovacoesSemestreAtual, reprovacoes_todo_curso = @reprovacoesSemestreAtual
 	                    WHERE nusp_aluno = @aluno;";
         }
 

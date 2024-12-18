@@ -37,6 +37,9 @@ namespace USP.Ganimedes.API.Model
         [JsonProperty("dificuldade_apoio_coordenacao")]
         public bool dificuldadeApoioCoordenacao { get; set; }
 
+        [JsonProperty("disciplinas_conceito_divulgado")]
+        public bool disciplinasConceitoDivulgado { get; set; }
+
         [JsonProperty("data_preenchimento")]
         public DateTime dataPreenchimento { get; set; }
 

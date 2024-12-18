@@ -21,6 +21,9 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+    <ProjectReference Include="..\Sistema-Ganimedes.Application\Sistema-Ganimedes.Application.csproj" />
+    <ProjectReference Include="..\Sistema-Ganimedes.Domain\Sistema-Ganimedes.Domain.csproj" />
+    <ProjectReference Include="..\Sistema-Ganimedes.Infrastructure\Sistema-Ganimedes.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

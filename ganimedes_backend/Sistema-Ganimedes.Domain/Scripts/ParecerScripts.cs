@@ -15,7 +15,8 @@
                         id_formulario as idFormulario,
                         parecer as parecer,
                         origem as origem,
-                        nusp_autor_parecer as nUspAutorParecer
+                        nusp_autor_parecer as nUspAutorParecer,
+                        conceito as conceito
 	                  FROM ganimedes.parecer
                       WHERE id_formulario = @idFormulario
                       AND origem = @origem;";
